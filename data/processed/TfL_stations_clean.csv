@@ -1,0 +1,437 @@
+station,line
+Acton Town,"District, Piccadilly"
+Barbican,"Circle, Hammersmith & City, Metropolitan"
+Aldgate,"Circle, Metropolitan"
+Aldgate East,"District, Hammersmith & City"
+Alperton,Piccadilly
+Amersham,Metropolitan
+Angel,Northern
+Archway,Northern
+Arnos Grove,Piccadilly
+Arsenal,Piccadilly
+Baker Street,"Bakerloo, Circle, Jubilee, Hammersmith & City, Metropolitan"
+Balham Lu,Northern
+Bank And Monument,"Central, Circle, District, Dlr, Northern, Waterloo & City"
+Barking,"District, Hammersmith & City, London Overground"
+Barkingside,Central
+Barons Court,"District, Piccadilly"
+Bayswater,"Circle, District"
+Becontree,District
+Belsize Park,Northern
+Bethnal Green Lu,Central
+Blackfriars Lu,"Circle, District"
+Blackhorse Road,"London Overground, Victoria"
+Bond Street,"Central, Jubilee, Tfl Rail"
+Borough,Northern
+Boston Manor,Piccadilly
+Bounds Green,Piccadilly
+Bow Road,"District, Hammersmith & City"
+Brent Cross,Northern
+Bromley-By-Bow,"District, Hammersmith & City"
+Buckhurst Hill,Central
+Burnt Oak,Northern
+Caledonian Road,Piccadilly
+Camden Town,Northern
+Cannon Street Lu,"Circle, District"
+Canons Park,Jubilee
+Chalfont & Latimer,Metropolitan
+Chalk Farm,Northern
+Chancery Lane,Central
+Embankment,"Bakerloo, Circle, District, Northern"
+Chesham,Metropolitan
+Chigwell,Central
+Chiswick Park,District
+Chorleywood,Metropolitan
+Clapham Common,Northern
+Clapham North,Northern
+Clapham South,Northern
+Cockfosters,Piccadilly
+Colindale,Northern
+Colliers Wood,Northern
+Covent Garden,Piccadilly
+Croxley,Metropolitan
+Dagenham East,District
+Dagenham Heathway,District
+Debden,Central
+Dollis Hill,Jubilee
+Ealing Broadway,"Central, District, Tfl Rail"
+Ealing Common,"District, Piccadilly"
+Earl'S Court,"District, Piccadilly"
+East Acton,Central
+Eastcote,"Metropolitan, Piccadilly"
+East Finchley,Northern
+East Ham,"District, Hammersmith & City"
+East Putney,District
+Edgware,Northern
+Edgware Road (Dis),"Circle, District, Hammersmith & City"
+Elephant & Castle Lu,"Northern, Bakerloo"
+Elm Park,District
+Epping,Central
+Euston Lu,"Northern, Victoria"
+Euston Square,"Circle, Hammersmith & City, Metropolitan"
+Fairlop,Central
+Farringdon,"Circle, Hammersmith & City, Metropolitan, Tfl Rail"
+Finchley Central,Northern
+Finchley Road,"Metropolitan, Jubilee"
+Finsbury Park,"Piccadilly, Victoria"
+Fulham Broadway,District
+Gants Hill,Central
+Gloucester Road,"District, Piccadilly, Circle"
+Golders Green,Northern
+Goldhawk Road,"Circle, Hammersmith & City"
+Goodge Street,Northern
+Grange Hill,Central
+Great Portland Street,"Circle, Hammersmith & City, Metropolitan"
+Greenford,Central
+Green Park,"Jubilee, Piccadilly, Victoria"
+Gunnersbury,"District, London Overground"
+Hainault,Central
+Hammersmith (Dis),"District, Piccadilly"
+Hampstead,Northern
+Hanger Lane,Central
+Harlesden,"Bakerloo, London Overground"
+Harrow & Wealdstone,"Bakerloo, London Overground"
+Harrow-On-The-Hill,Metropolitan
+Hendon Central,Northern
+High Barnet,Northern
+Highbury & Islington,"London Overground, Victoria"
+Highgate,Northern
+High Street Kensington,"Circle, District"
+Hillingdon,"Metropolitan, Piccadilly"
+Holborn,"Central, Piccadilly"
+Holland Park,Central
+Holloway Road,Piccadilly
+Hornchurch,District
+Hounslow Central,Piccadilly
+Hounslow East,Piccadilly
+Hounslow West,Piccadilly
+Hyde Park Corner,Piccadilly
+Ickenham,"Metropolitan, Piccadilly"
+Kennington,Northern
+Kensal Green,"Bakerloo, London Overground"
+Kensington (Olympia),"District, London Overground"
+Kentish Town,Northern
+Kenton,"Bakerloo, London Overground"
+Kew Gardens,"District, London Overground"
+Kilburn,Jubilee
+Kilburn Park,Bakerloo
+Kingsbury,Jubilee
+King'S Cross St. Pancras,"Circle, Hammersmith & City, Metropolitan, Northern, Piccadilly, Victoria"
+Knightsbridge,Piccadilly
+Ladbroke Grove,"Circle, Hammersmith & City"
+Lambeth North,Bakerloo
+Lancaster Gate,Central
+Latimer Road,"Circle, Hammersmith & City"
+Leicester Square,"Piccadilly, Northern"
+Leyton,Central
+Leytonstone,Central
+Liverpool Street Lu,"Central, Circle, Hammersmith & City, London Overground, Metropolitan"
+London Bridge Lu,"Northern, Jubilee"
+Loughton,Central
+Maida Vale,Bakerloo
+Manor House,Piccadilly
+Mansion House,"Circle, District"
+Marble Arch,Central
+Marylebone Lu,Bakerloo
+Mile End,"District, Hammersmith & City, Central"
+Mill Hill East,Northern
+Moorgate,"Circle, Hammersmith & City, Metropolitan"
+Moor Park,Metropolitan
+Morden,Northern
+Mornington Crescent,Northern
+Neasden,Jubilee
+Newbury Park,Central
+New Cross,Nan
+New Cross Gate,Nan
+North Acton,Central
+North Ealing,Piccadilly
+Northfields,Piccadilly
+North Harrow,Metropolitan
+Northolt,Central
+North Wembley,"Bakerloo, London Overground"
+Northwick Park,Metropolitan
+Northwood,Metropolitan
+Northwood Hills,Metropolitan
+Notting Hill Gate,"Central, Circle, District"
+Oakwood,Piccadilly
+Old Street,Northern
+Osterley,Piccadilly
+Oval,Northern
+Oxford Circus,"Bakerloo, Central, Victoria"
+Paddington Tfl,"Circle, District, Hammersmith & City"
+Park Royal,Piccadilly
+Parsons Green,District
+Perivale,Central
+Piccadilly Circus,"Bakerloo, Piccadilly"
+Pinner,Metropolitan
+Plaistow,"District, Hammersmith & City"
+Preston Road,Metropolitan
+Putney Bridge,District
+Queensbury,Jubilee
+Queen'S Park,"Bakerloo, London Overground"
+Queensway,Central
+Ravenscourt Park,District
+Rayners Lane,"Metropolitan, Piccadilly"
+Redbridge,Central
+Regent'S Park,Bakerloo
+Richmond,"District, London Overground"
+Rickmansworth,Metropolitan
+Roding Valley,Central
+Rotherhithe,Nan
+Royal Oak,"Circle, Hammersmith & City"
+Ruislip,"Metropolitan, Piccadilly"
+Ruislip Gardens,Central
+Ruislip Manor,"Metropolitan, Piccadilly"
+Russell Square,Piccadilly
+St. James'S Park,"Circle, District"
+St. John'S Wood,Jubilee
+St. Paul'S,Central
+Seven Sisters,"London Overground, Victoria"
+Shadwell,Nan
+Shepherd'S Bush Lu,Central
+Shoreditch,Nan
+Sloane Square,"Circle, District"
+Snaresbrook,Central
+South Ealing,Piccadilly
+Southfields,District
+Southgate,Piccadilly
+South Harrow,Piccadilly
+South Kensington,"District, Piccadilly, Circle"
+South Kenton,"Bakerloo, London Overground"
+South Ruislip,Central
+South Wimbledon,Northern
+South Woodford,Central
+Stamford Brook,District
+Stanmore,Jubilee
+Stepney Green,"District, Hammersmith & City"
+Stockwell,"Northern, Victoria"
+Stonebridge Park,"Bakerloo, London Overground"
+Charing Cross Lu,"Bakerloo, Northern"
+Stratford,"Central, Dlr, Jubilee, London Overground, Tfl Rail"
+Sudbury Hill,Piccadilly
+Sudbury Town,Piccadilly
+Surrey Quays,Nan
+Swiss Cottage,Jubilee
+Temple,"Circle, District"
+Theydon Bois,Central
+Tooting Bec,Northern
+Tooting Broadway,Northern
+Tottenham Court Road,"Central, Northern, Tfl Rail"
+Tottenham Hale Lu,Victoria
+Totteridge & Whetstone,Northern
+Tower Hill,"Circle, District"
+Tufnell Park,Northern
+Turnham Green,"District, Piccadilly"
+Turnpike Lane,Piccadilly
+Upminster,"District, London Overground"
+Upminster Bridge,District
+Upney,District
+Upton Park,"District, Hammersmith & City"
+Uxbridge,"Metropolitan, Piccadilly"
+Victoria Lu,"Circle, District, Victoria"
+Walthamstow Central,"London Overground, Victoria"
+Wanstead,Central
+Wapping,Nan
+Warren Street,"Northern, Victoria"
+Warwick Avenue,Bakerloo
+Waterloo Lu,"Bakerloo, Jubilee, Northern, Waterloo & City"
+Watford,Metropolitan
+Wembley Central,"Bakerloo, London Overground"
+Wembley Park,"Metropolitan, Jubilee"
+West Acton,Central
+Westbourne Park,"Circle, Hammersmith & City"
+West Brompton,"District, London Overground"
+West Finchley,Northern
+West Ham,"District, Dlr, Hammersmith & City, Jubilee"
+West Hampstead Lu,Jubilee
+West Harrow,Metropolitan
+West Kensington,District
+Westminster,"Circle, District, Jubilee"
+West Ruislip,Central
+Whitechapel,"District, Hammersmith & City, London Overground, Tfl Rail"
+White City,Central
+Willesden Green,Jubilee
+Willesden Junction,"Bakerloo, London Overground"
+Wimbledon,District
+Wimbledon Park,District
+Woodford,Central
+Wood Green,Piccadilly
+Woodside Park,Northern
+Hammersmith (H&C),"Circle, Hammersmith & City"
+Edgware Road (Bak),Bakerloo
+Shepherd'S Bush Market,"Circle, Hammersmith & City"
+Pimlico,Victoria
+Vauxhall Lu,Victoria
+Brixton Lu,Victoria
+Hatton Cross,Piccadilly
+Heathrow Terminals 123 Lu,Piccadilly
+Heathrow Terminal 4 Lu,Piccadilly
+Southwark,Jubilee
+Bermondsey,Jubilee
+Canada Water,"Jubilee, London Overground"
+North Greenwich,Jubilee
+Canary Wharf Lu,Jubilee
+Canning Town,"Dlr, Jubilee"
+Wood Lane,"Circle, Hammersmith & City"
+Heathrow Terminal 5 Lu,Piccadilly
+Stratford International Dlr,Dlr
+King George V,Dlr
+London City Airport,Dlr
+Pontoon Dock,Dlr
+West Silvertown,Dlr
+Woolwich Arsenal,Dlr
+Stratford High Street,Dlr
+Abbey Road,Dlr
+Canary Wharf Dlr,Dlr
+All Saints,Dlr
+Bow Church,Dlr
+Langdon Park,Dlr
+Crossharbour,Dlr
+Heron Quays,Dlr
+Island Gardens,Dlr
+Mudchute,Dlr
+Poplar,Dlr
+Pudding Mill Lane,Dlr
+Shadwell Dlr,Dlr
+South Quay,Dlr
+Limehouse Dlr,Dlr
+Tower Gateway,Dlr
+Westferry,Dlr
+West India Quay,Dlr
+Devons Road,Dlr
+Cutty Sark,Dlr
+Blackwall,Dlr
+East India,Dlr
+Royal Victoria,Dlr
+Custom House,"Dlr, Tfl Rail"
+Prince Regent,Dlr
+Star Lane,Dlr
+Royal Albert,Dlr
+Beckton Park,Dlr
+Cyprus,Dlr
+Gallions Reach,Dlr
+Beckton,Dlr
+Deptford Bridge,Dlr
+Elverson Road,Dlr
+Greenwich,Dlr
+Lewisham Dlr,Dlr
+Haggerston,London Overground
+Hoxton,London Overground
+Shoreditch High Street,London Overground
+Rotherhithe,London Overground
+Shadwell Lo,London Overground
+Surrey Quays,London Overground
+Wapping,London Overground
+Bushey,London Overground
+Hatch End,London Overground
+Watford Junction,London Overground
+Acton Central,London Overground
+Gospel Oak,London Overground
+Hampstead Heath,London Overground
+Kilburn High Road,London Overground
+West Hampstead Lo,London Overground
+Dalston Kingsland,London Overground
+Headstone Lane,Nan
+Brondesbury,London Overground
+Brondesbury Park,London Overground
+Caledonian Road & Barnsbury,London Overground
+Camden Road,London Overground
+Canonbury,London Overground
+Carpenders Park,London Overground
+Dalston Junction,London Overground
+Euston Nr,London Overground
+Finchley Road & Frognal,London Overground
+Kensal Rise,London Overground
+Kentish Town West,London Overground
+South Hampstead,London Overground
+South Acton,London Overground
+Watford High Street,London Overground
+Upper Holloway,London Overground
+New Cross,London Overground
+Clapham High Street,London Overground
+New Cross Gate,London Overground
+Crystal Palace,London Overground
+Forest Hill,London Overground
+Wandsworth Road,London Overground
+Norwood Junction,London Overground
+Penge West,London Overground
+Anerley,London Overground
+Brockley,London Overground
+West Croydon Nr,London Overground
+Honor Oak Park,London Overground
+Battersea Park,London Overground
+Denmark Hill,London Overground
+Peckham Rye,London Overground
+Queens Road Peckham,London Overground
+Sydenham,London Overground
+Clapham Junction,London Overground
+Cheshunt,London Overground
+Hackney Downs,London Overground
+Brentwood,Tfl Rail
+Chadwell Heath,Tfl Rail
+Forest Gate,Tfl Rail
+Gidea Park,Tfl Rail
+Goodmayes,Tfl Rail
+Harold Wood,Tfl Rail
+Ilford,Tfl Rail
+Manor Park,Tfl Rail
+Romford,"London Overground, Tfl Rail"
+Shenfield,Tfl Rail
+Seven Kings,Tfl Rail
+Bush Hill Park,London Overground
+Chingford,London Overground
+Highams Park,London Overground
+Clapton,London Overground
+Stoke Newington,London Overground
+Edmonton Green,London Overground
+Southbury,London Overground
+Theobalds Grove,London Overground
+Turkey Street,London Overground
+Wood Street,London Overground
+White Hart Lane,London Overground
+Bruce Grove,London Overground
+Enfield Town,London Overground
+Bethnal Green Lo,London Overground
+Cambridge Heath,London Overground
+Liverpool Street Nr,Tfl Rail
+London Fields,London Overground
+Rectory Road,London Overground
+Stamford Hill,London Overground
+Maryland,Tfl Rail
+Silver Street,London Overground
+St James Street,London Overground
+Hackney Central,London Overground
+Hackney Wick,London Overground
+Homerton,London Overground
+Harringay Green Lanes,London Overground
+Leyton Midland Road,London Overground
+Leytonstone High Road,London Overground
+South Tottenham,London Overground
+Crouch Hill,London Overground
+Walthamstow Queen'S Road,London Overground
+Wanstead Park,London Overground
+Woodgrange Park,London Overground
+Emerson Park,London Overground
+Imperial Wharf,London Overground
+Shepherd'S Bush Nr,London Overground
+Acton Main Line,Tfl Rail
+Paddington Nr,Tfl Rail
+Hayes & Harlington,London Overground
+Hayes & Harlington,Tfl Rail
+Southall,Tfl Rail
+West Ealing,Tfl Rail
+Hanwell,Tfl Rail
+Heathrow Terminals 2 & 3 El,Tfl Rail
+Heathrow Terminal 4 El,Tfl Rail
+Maidenhead,Tfl Rail
+Reading,Tfl Rail
+Taplow,Tfl Rail
+Twyford,Tfl Rail
+Iver,Tfl Rail
+Langley,Tfl Rail
+Slough,Tfl Rail
+West Drayton,Tfl Rail
+Burnham,Tfl Rail
+Heathrow Terminal 5 El,Tfl Rail
+Nine Elms,Northern
+Battersea Power Station,Northern
