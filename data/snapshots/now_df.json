@@ -1,0 +1,57 @@
+[
+  {
+    "line":"Bakerloo",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Central",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Circle",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"District",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Hammersmith & City",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Jubilee",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Metropolitan",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Northern",
+    "severity":6,
+    "status":"Severe Delays"
+  },
+  {
+    "line":"Piccadilly",
+    "severity":6,
+    "status":"Severe Delays"
+  },
+  {
+    "line":"Victoria",
+    "severity":10,
+    "status":"Good Service"
+  },
+  {
+    "line":"Waterloo & City",
+    "severity":10,
+    "status":"Good Service"
+  }
+]
