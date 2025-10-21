@@ -29,9 +29,9 @@
 ---
  
 ## What CommuTech is
-**Problem.** Unreliable service creates stress and productivity loss for London commuters, especially at peak times.
+**Problem:** Unreliable service creates stress and productivity loss for London commuters, especially at peak times.
  
-**My solution for 001.** I use TfL’s Unified API to surface **when** and **where** disruption is likely in the *next N days*, with visuals optimised for decision‑making at a glance:
+**My solution for 001:** I use TfL’s Unified API to surface **when** and **where** disruption is likely in the *next N days*, with visuals optimised for decision‑making at a glance:
 - "**Now**" status overview (which lines are affected right now?)
 - **Hour×day heatmap** of planned disruption (where time risk clusters)
 - **AM/PM commute‑risk by line** (what a commuter will actually feel)
@@ -65,7 +65,7 @@
  
 ### Setup
 ```bash
-python -m venv .venv && source .venv/bin/activate   # macOS/Linux
+python -m venv .venv && source .venv/bin/activate   # macOS
 pip install -r requirements.txt
  
 # I set my key as an environment variable (never committed to Git)
@@ -86,7 +86,7 @@ I open **Datasets.ipynb** in VS Code and **Run All**. The notebook:
 ## How the notebook runs (pipeline)
 1. **Snapshot** → `GET /Line/Mode/tube/Status?detail=true` returns per‑line statuses and any `validityPeriods` (from‑to timestamps).
 2. **Look‑ahead** → I normalise validity windows to **Europe/London** and split into hourly buckets with **true duration overlap**.
-3. **Visuals** → the derived hour×day matrix and commute‑window overlaps are rendered as the figures listed below.
+3. **Visuals** → The derived hour×day matrix and commute‑window overlaps are rendered as the figures listed below.
  
 ---
  
@@ -212,7 +212,7 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
 - **Event‑hours** → per hour×day cell, I sum planned duration overlapping that hour within the horizon.
 - **Commute‑risk** → event‑hours during Mon–Fri 07–10 and 16–19 divided by available commute hours in the horizon.
  
-> When validity periods are missing, a status may still apply “now”; the cells treat the snapshot as active over a short default window.
+> When validity periods are missing, a status may still apply “now”. The cells treat the snapshot as active over a short default window.
  
 ---
  
@@ -235,8 +235,8 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
 ---
  
 ## Business case snapshot
-- **Value:** fewer missed connections; calmer commutes; better arrival predictability.
-- **Audience:** weekday commuters on highest‑risk lines/times.
+- **Value:** Fewer missed connections; calmer commutes; better arrival predictability.
+- **Audience:** Weekday commuters on highest‑risk lines/times.
 - **Model:** Free tier + Pro (ad‑free, personalised alerts, calendar sync).
 - **Differentiator:** *When‑focused* risk that non‑technical audiences grasp in seconds (AM/PM risk + heatmap hotspots).
  
@@ -245,7 +245,7 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
 ## Repo hygiene: `.env.example` and `.gitignore`
 I commit a **`.env.example`** to show required variables, and I **do not** commit my real `.env`.
  
-**`.env.example`**
+**`.env.example:`**
 ```dotenv
 # Copy this file to .env and fill in the value below
 TFL_APP_KEY=__REPLACE_WITH_YOUR_TFL_KEY__
@@ -268,7 +268,7 @@ __pycache__/
 .env
 .env.*
 ```
-> I create **both** of these files in the repo: commit `.env.example` and `.gitignore`; do **not** commit `.env`.
+> I create **both** of these files in the repo - commit `.env.example` and `.gitignore`; do **not** commit `.env`.
  
 ---
  
@@ -281,7 +281,7 @@ __pycache__/
 ---
  
 ## Security, privacy, attribution & licensing
-- **Privacy:** Only public TfL data; **no PII**.
+- **Privacy:** Only public TfL data, **no PII**.
 - **Secrets:** I keep my TfL key in env vars / a git‑ignored `.env`. I never commit keys. If a key is exposed, I rotate it immediately in the TfL portal.
 - **Attribution:** Data © Transport for London (TfL). Use complies with Unified API terms.
  
@@ -291,7 +291,7 @@ __pycache__/
 > **EDIT for 002 (planned):** When I move to 002, I may adopt a permissive licence (e.g., MIT) to encourage reuse. If I do, I will add a `LICENSE` file and include a short note here:
 >
 > ```text
-> [002 EDIT] Licensing update — MIT licence added on <DATE>. Third‑party data remains © TfL; I comply with their terms. TBC
+> [002 EDIT] Licensing update - MIT license added on <DATE>. Third‑party data remains © TfL; I comply with their terms. TBC
 > ```
  
 ---
@@ -334,4 +334,3 @@ import os; assert os.getenv("TFL_APP_KEY"), "Set TFL_APP_KEY in environment or .
 ```
  
 **Rotate a leaked key:** If a key was ever pasted publicly, I regenerate (rotate) the key in the TfL developer portal and update my environment.
-
