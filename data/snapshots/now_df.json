@@ -41,8 +41,8 @@
   },
   {
     "line":"Piccadilly",
-    "severity":6,
-    "status":"Severe Delays"
+    "severity":10,
+    "status":"Good Service"
   },
   {
     "line":"Victoria",
