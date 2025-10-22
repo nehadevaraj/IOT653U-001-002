@@ -1,0 +1,12 @@
+ts_utc,line,severity,status
+2025-10-22T13:28:34.751526+00:00,Bakerloo,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Central,9,Minor Delays
+2025-10-22T13:28:34.751526+00:00,Circle,10,Good Service
+2025-10-22T13:28:34.751526+00:00,District,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Hammersmith & City,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Jubilee,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Metropolitan,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Northern,6,Severe Delays
+2025-10-22T13:28:34.751526+00:00,Piccadilly,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Victoria,10,Good Service
+2025-10-22T13:28:34.751526+00:00,Waterloo & City,10,Good Service
