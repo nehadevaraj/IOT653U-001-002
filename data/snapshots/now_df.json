@@ -6,8 +6,8 @@
   },
   {
     "line":"Central",
-    "severity":9,
-    "status":"Minor Delays"
+    "severity":10,
+    "status":"Good Service"
   },
   {
     "line":"Circle",
@@ -31,8 +31,8 @@
   },
   {
     "line":"Metropolitan",
-    "severity":10,
-    "status":"Good Service"
+    "severity":5,
+    "status":"Part Closure"
   },
   {
     "line":"Northern",
@@ -41,8 +41,8 @@
   },
   {
     "line":"Piccadilly",
-    "severity":5,
-    "status":"Part Closure"
+    "severity":3,
+    "status":"Part Suspended"
   },
   {
     "line":"Victoria",
