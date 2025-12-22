@@ -82,7 +82,6 @@
 "CST": "Cannon Street|1",
 "CHP": "Chiswick Park|3",
 "DGE": "Dagenham East|5",
-"DGH": "Dagenham Heathway|5",
 "ECM": "Ealing Common|3",
 "ECT": "Earl's Court|1|2",
 "EHM": "East Ham|3|4",
@@ -269,5 +268,5 @@
 "WBP": "Westbourne Pakr|2",
 "CHS": "Chesham|9",
 "PRR": "Preston Road|4",
-"ZBP": "Battersea Power Station|1", _ref TfL Tech Forum
-"ZNE": "Nine Elms|1", _ref TfL Tech Forum
+"ZBP": "Battersea Power Station|1",
+"ZNE": "Nine Elms|1"
