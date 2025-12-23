@@ -1,6 +1,6 @@
 '''
-stations.json and lines.json: https://gist.github.com/paulcuth/1111303
-used CRS codes for battersea power station and nine elms: https://techforum.tfl.gov.uk/t/crs-codes-and-other-three-letter-codes-for-battersea-power-station-and-nine-elms/1923
+reference: stations.json and lines.json: https://gist.github.com/paulcuth/1111303
+reference: used CRS codes for battersea power station and nine elms: https://techforum.tfl.gov.uk/t/crs-codes-and-other-three-letter-codes-for-battersea-power-station-and-nine-elms/1923
 '''
 
 import json
@@ -25,6 +25,48 @@ LINE_NAME = {
     "P": "Piccadilly",
     "V": "Victoria",
     "W": "Waterloo & City",}
+
+#fare logic:
+'''Peak PAYG single fares (zones-based) – used as a phase 1 estimate.\n
+Keys represent contiguous zone ranges:\n
+"12" -> Zones 1–2, "2345" -> Zones 2–5, "789" -> Zones 7–9, etc. '''
+#reference: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.london.gov.uk/media/107475/download&ved=2ahUKEwiht77b39ORAxXWTkEAHfKQCDAQFnoECBgQAQ&usg=AOvVaw3RtmOGoB1-GSkm7g0RqnGI
+PEAK_FARE_BY_ZONES_KEY = {#zone 1 ranges
+    "1": 2.90,
+    "12": 3.50,
+    "123": 3.80,
+    "1234": 4.60,
+    "12345": 5.20,
+    "123456": 5.80,
+    "1234567": 6.70,
+    "12345678": 8.20,
+    "123456789": 8.30,
+
+    #outer-zone equivalents (non-zone-1)
+    "2": 2.10, "3": 2.10, "4": 2.10, "5": 2.10, "6": 2.10,
+    "23": 2.30, "34": 2.30, "45": 2.30, "56": 2.30,
+    "234": 3.00, "345": 3.00, "456": 3.00,
+    "2345": 3.20, "3456": 3.20,
+    "23456": 3.60,
+    "234567": 4.90,
+    "2345678": 5.60,
+    "23456789": 5.60,
+    "34567": 4.00,
+    "345678": 4.80,
+    "3456789": 5.00,
+    "4567": 3.20,
+    "45678": 4.00,
+    "456789": 4.10,
+    "567": 2.90,
+    "5678": 3.20,
+    "56789": 3.50,
+    "67": 2.20,
+    "678": 2.90,
+    "6789": 3.00,
+    "7": 2.00,
+    "78": 2.20,
+    "789": 2.30,
+    "89": 2.20,}
 
 def parse_station_value(v: str):
     parts = [p.strip() for p in v.split("|") if p.strip()]
@@ -56,6 +98,43 @@ def estimate_peak_fare_zone_based(origin_zones: list[int], dest_zones: list[int]
         return (0, 0)
     _, mn, mx = min(candidates, key=lambda t: t[0])
     return mn, mx
+
+#fare logic defs:
+def zones_key(min_zone: int, max_zone: int) -> str:
+    """Return the contiguous zones key like '2345' for min=2 max=5."""
+    return "".join(str(z) for z in range(min_zone, max_zone + 1))
+
+def fare_range_for_station_pair(origin_zones: list[int], dest_zones: list[int]):
+    """
+    For boundary stations (e.g. 2|3), try all zone combinations and return:
+    - min fare + its zones key
+    - max fare + its zones key
+    This is Phase 1: zone-based estimate only (no route graph).
+    """
+    fares = []
+    for oz in origin_zones:
+        for dz in dest_zones:
+            mn, mx = min(oz, dz), max(oz, dz)
+            key = zones_key(mn, mx)
+            fare = PEAK_FARE_BY_ZONES_KEY.get(key)
+            if fare is not None:
+                fares.append((fare, key))
+
+    if not fares:
+        return None, None, None, None
+
+    fares.sort(key=lambda t: t[0])
+    min_fare, min_key = fares[0]
+    max_fare, max_key = fares[-1]
+    return min_fare, max_fare, min_key, max_key
+
+def price_band(fare: float) -> str:
+    """Simple Phase 1 buckets."""
+    if fare <= 2.30:
+        return "Cheaper"
+    if fare <= 4.00:
+        return "Mid"
+    return "Expensive"
 
 #data loading:
 @st.cache_data(show_spinner=False)
@@ -110,8 +189,26 @@ to_lines = expand_line_codes(lines_raw.get(to_code, []))
 intersection = sorted(set(from_lines).intersection(set(to_lines)))
 union = sorted(set(from_lines).union(set(to_lines)))
 recommended = intersection if intersection else union
-mn, mx = estimate_peak_fare_zone_based(from_zones, to_zones)
-zone_summary = f"Estimated zone span: **{mn} → {mx}**" if mn and mx else "Zone span unavailable"
+
+#zone summary:
+min_fare, max_fare, min_key, max_key = fare_range_for_station_pair(from_zones, to_zones)
+
+if min_fare is None:
+    zone_summary = "Fare estimate unavailable (zone key not found)"
+    fare_text = "—"
+    band_text = "—"
+else:
+    #avg fare for boundary ambiguity
+    avg_fare = (min_fare + max_fare) / 2
+
+    if min_fare == max_fare:
+        zone_summary = f"Zones key: **{min_key}**"
+        fare_text = f"£{min_fare:.2f}"
+    else:
+        zone_summary = f"Best-case key: **{min_key}** • Worst-case key: **{max_key}**"
+        fare_text = f"£{min_fare:.2f} – £{max_fare:.2f} (avg £{avg_fare:.2f})"
+
+    band_text = price_band(avg_fare) #using mean or average instead of best or worst case
 
 #layout:
 c1, c2, c3 = st.columns(3)
@@ -131,9 +228,14 @@ with c2:
 with c3:
     st.subheader("Journey summary")
     st.info(zone_summary)
+    st.write("**Peak fare estimate (Phase 1):**", fare_text)
+    st.write("**Relative price score:**", band_text)
+    st.caption(
+        "Phase 1 uses a zones-based fare table. Because boundary stations can be treated as either zone, "
+        "we use the mean of best/worst zone-interpretations as a simple estimate (may not always match TfL). "
+        "Phase 2 will use TfL Single Fare Finder.")
     st.write("**Recommended line(s)** (simple):")
     st.write(", ".join(recommended) if recommended else "—")
-    st.caption("Note: fare logic is Phase 1 placeholder (zone-span based). Phase 2 will align with TfL peak fare rules more precisely.")
 
 st.divider()
 st.subheader("Next steps for Phase 1")
@@ -142,3 +244,4 @@ st.write(
     "- Add a **peak fare table** (zones band → price)\n"
     "- Replace the placeholder estimate with your agreed TfL-like peak logic\n"
     "- Add a clean 'commute snapshot' section (still offline)\n")
+
