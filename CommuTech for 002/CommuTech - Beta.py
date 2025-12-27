@@ -6,6 +6,7 @@ reference: used CRS codes for battersea power station and nine elms: https://tec
 import json
 from pathlib import Path
 import streamlit as st
+import random
 
 #app config:
 st.set_page_config(page_title="CommuTech (Beta)",page_icon="🚇",layout="wide",)
@@ -26,10 +27,24 @@ LINE_NAME = {
     "V": "Victoria",
     "W": "Waterloo & City",}
 
-#fare logic:
-'''Peak PAYG single fares (zones-based) – used as a phase 1 estimate.\n
-Keys represent contiguous zone ranges:\n
-"12" -> Zones 1–2, "2345" -> Zones 2–5, "789" -> Zones 7–9, etc. '''
+#commute-smart recommender logic:
+INTERCHANGE_PRIORITY = {
+    "Jubilee",
+    "Central",
+    "Northern",
+    "Victoria",
+    "Piccadilly",
+    "District",
+    "Circle",
+    "Hammersmith & City",
+    "Metropolitan",
+    "Bakerloo",
+    "Waterloo & City",}
+
+#phase 2: CommuTech Cockpit pipeline
+st.markdown("#### 🧭 CommuTech Cockpit (Phase 2)")
+st.caption("Your personalised service radar.")
+st.info("Phase 2 placeholder: live service status + arrivals + disruption insights (API) and ML predictions will appear here.")
 #reference: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.london.gov.uk/media/107475/download&ved=2ahUKEwiht77b39ORAxXWTkEAHfKQCDAQFnoECBgQAQ&usg=AOvVaw3RtmOGoB1-GSkm7g0RqnGI
 PEAK_FARE_BY_ZONES_KEY = {#zone 1 ranges
     "1": 2.90,
@@ -98,6 +113,18 @@ def estimate_peak_fare_zone_based(origin_zones: list[int], dest_zones: list[int]
         return (0, 0)
     _, mn, mx = min(candidates, key=lambda t: t[0])
     return mn, mx
+
+#commute-smart recommender logic:
+def suggest_interchange_line(union_lines: list[str]) -> str | None:
+    """
+    Pick the highest priority line that exists in the union.\n
+    Returns the line name (e.g., 'Jubilee') or None. \n
+    """
+    union_set = set(union_lines)
+    for line in INTERCHANGE_PRIORITY:
+        if line in union_set:
+            return line
+    return None #BOSCH IM THE GOAT
 
 #fare logic defs:
 def zones_key(min_zone: int, max_zone: int) -> str:
@@ -176,8 +203,23 @@ with st.expander("Data checks (Phase 1)", expanded=False):
 sorted_codes = sorted(stations.keys(), key=lambda c: stations[c]["name"].lower())
 labels = {c: format_station_label(c, stations[c]["name"]) for c in sorted_codes}
 st.sidebar.header("Journey inputs")
-from_code = st.sidebar.selectbox("From", options=sorted_codes, format_func=lambda c: labels[c], index=0)
-to_code = st.sidebar.selectbox("To", options=sorted_codes, format_func=lambda c: labels[c], index=1 if len(sorted_codes) > 1 else 0)
+#fancy UI for downdrops (dont spend too long on this):
+PLACEHOLDER = "Select station"
+from_options = [PLACEHOLDER] + sorted_codes
+to_options = [PLACEHOLDER] + sorted_codes
+from_code = st.sidebar.selectbox(
+    "From",
+    options=from_options,
+    format_func=lambda c: PLACEHOLDER if c == PLACEHOLDER else labels[c],
+    index=0,)
+to_code = st.sidebar.selectbox(
+    "To",
+    options=to_options,
+    format_func=lambda c: PLACEHOLDER if c == PLACEHOLDER else labels[c],
+    index=0,)
+if from_code == PLACEHOLDER or to_code == PLACEHOLDER:
+    st.info("Select your **From** and **To** stations to see the journey summary.")
+    st.stop()
 
 #compute outputs:
 from_name = stations[from_code]["name"]
@@ -188,7 +230,23 @@ from_lines = expand_line_codes(lines_raw.get(from_code, []))
 to_lines = expand_line_codes(lines_raw.get(to_code, []))
 intersection = sorted(set(from_lines).intersection(set(to_lines)))
 union = sorted(set(from_lines).union(set(to_lines)))
-recommended = intersection if intersection else union
+journey_hint = None
+if intersection:
+    #if there are shared lines, randomly picking ONE
+    recommended_line = random.choice(intersection)
+    recommended = [recommended_line]
+else:
+    origin_pick = random.choice(from_lines) if from_lines else None
+    dest_pick = random.choice(to_lines) if to_lines else None
+    #recommended "target" line is the destination line - post 002 submission
+    recommended_line = dest_pick
+    recommended = [recommended_line] if recommended_line else []
+    if origin_pick and dest_pick:
+        journey_hint = f"Start on **{origin_pick}**, then interchange onto **{dest_pick}** to reach **{to_name}**."
+    elif dest_pick:
+        journey_hint = f"Interchange onto **{dest_pick}** to reach **{to_name}**."
+    else:
+        journey_hint = "No line suggestion available for this journey."
 
 #zone summary:
 min_fare, max_fare, min_key, max_key = fare_range_for_station_pair(from_zones, to_zones)
@@ -234,14 +292,16 @@ with c3:
         "Phase 1 uses a zones-based fare table. Because boundary stations can be treated as either zone, "
         "we use the mean of best/worst zone-interpretations as a simple estimate (may not always match TfL). "
         "Phase 2 will use TfL Single Fare Finder.")
-    st.write("**Recommended line(s)** (simple):")
+    st.write("**Recommended line:**")
+    if journey_hint:
+        st.caption(journey_hint)
     st.write(", ".join(recommended) if recommended else "—")
 
 st.divider()
 st.subheader("Next steps for Phase 1")
 
 st.write(
-    "- Add a **peak fare table** (zones band → price)\n"
-    "- Replace the placeholder estimate with your agreed TfL-like peak logic\n"
-    "- Add a clean 'commute snapshot' section (still offline)\n")
+    "- Add a **basic routing layer** (Phase 1.5): simplest graph-based route or interchange station hints\n"
+    "- Polish UI: 'Commute summary' card styling + clearer wording\n"
+    "- Phase 2: CommuTech Cockpit (live status + arrivals + route sequence via Unified API)\n")
 
