@@ -14,7 +14,7 @@ from datetime import datetime
 #app config:
 st.set_page_config(page_title="CommuTech (Beta)",page_icon="🚇",layout="wide",)
 st.title("🚇 CommuTech (Beta)")
-st.caption("Phase 1: Journey setup + zones/lines (offline)")
+st.markdown("_Smarter planning for London commutes_")
 
 #API STUFF:
 try:
@@ -484,7 +484,7 @@ else:
 missing_lines = sorted([c for c in stations.keys() if c not in lines_raw])
 missing_stations = sorted([c for c in lines_raw.keys() if c not in stations])
 
-with st.expander("Data checks (Phase 1)", expanded=False):
+with st.expander("Basic data checks", expanded=False):
     st.write(f"Stations loaded: **{len(stations)}**")
     st.write(f"Lines entries loaded: **{len(lines_raw)}**")
     if missing_lines:
@@ -493,6 +493,53 @@ with st.expander("Data checks (Phase 1)", expanded=False):
         st.warning(f"{len(missing_stations)} line entries have no matching station in stations.json (first 15): {missing_stations[:15]}")
     if not missing_lines and not missing_stations:
         st.success("Station codes match between stations.json and lines.json ✅")
+with st.expander("Complex data checks", expanded=False):
+    if not api_key_present:
+        st.info("Data unavailable until a TfL API key is set (TFL_API_KEY).")
+    else:
+        st.write("TfL API key detected ✅")
+        live = st.session_state.get("live", {})
+        tube_status_live = live.get("status")
+        tube_status_ts = live.get("status_ts")
+        arrivals_live = live.get("arrivals")
+        arrivals_ts = live.get("arrivals_ts")
+        #1 tube status summary
+        if tube_status_live is None:
+            st.info("Tube status unavailable until you click **Refresh live data**.")
+        else:
+            good = 0
+            disrupted = 0
+            for ln in tube_status_live:
+                statuses = ln.get("lineStatuses") or []
+                desc = (statuses[0].get("statusSeverityDescription") if statuses else "") or ""
+                if "Good Service" in desc:
+                    good += 1
+                else:
+                    disrupted += 1
+            st.write(f"Lines returned: **{len(tube_status_live)}**")
+            st.write(f"Good service: **{good}**")
+            st.write(f"Disrupted: **{disrupted}**")
+            st.caption(f"Last refreshed (status): {tube_status_ts}")
+        st.divider()
+        #2rrivals summary
+        if not journey_ready:
+            st.info("Arrivals summary appears once you select **From** and **To**.")
+        else:
+            st.write(f"Arrivals station: **{to_name}**")
+            if not arrivals_live:
+                st.info("Arrivals unavailable until you click **Refresh live data**.")
+            else:
+                st.write(f"Arrivals rows returned: **{len(arrivals_live)}**")
+                #3 quick “next train” summary
+                next_tts = min(
+                    (a.get("timeToStation") for a in arrivals_live if isinstance(a.get("timeToStation"), int)),
+                    default=None)
+                if next_tts is not None:
+                    st.write(f"Next train ETA: **{max(0, int(next_tts)//60)} min**")
+                lines_present = {a.get("lineName") for a in arrivals_live if a.get("lineName")}
+                st.write(f"Lines represented: **{len(lines_present)}**")
+                st.caption(f"Last refreshed (arrivals): {arrivals_ts}")
+
     ####NEW DATA QUALITY BADGE
     status, issues = compute_data_quality(stations, lines_raw)
     if status == "OK":
