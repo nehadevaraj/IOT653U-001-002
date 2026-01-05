@@ -645,10 +645,13 @@ if journey_ready:
         st.write(", ".join(recommended) if recommended else "—")
 
     st.divider()
-    st.subheader("Next steps for Phase 1")
+    st.subheader("Pipeline for post 13th Jan")
 
     st.write(
-        "- Add a **basic routing layer** (Phase 1.5): simplest graph-based route or interchange station hints\n"
-        "- Polish UI: 'Commute summary' card styling + clearer wording\n"
-        "- Phase 2: CommuTech Cockpit (live status + arrivals + route sequence via Unified API)\n")
+        "- Route intelligence: graph-based routing with interchange optimisation (fewest changes, reliability-aware routing)\n"
+        "- Fare realism: integrate TfL Single Fare Finder / route-based fare logic + boundary-station disambiguation\n"
+        "- Operational resilience: richer disruption semantics (line part-closures, station closures) + fallback modes when APIs degrade\n"
+        "- Governance & evaluation: reproducible “snapshot runs”, logging of refresh timestamps, and benchmark scenarios for validation\n")
+
+
 
