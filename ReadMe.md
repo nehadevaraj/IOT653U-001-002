@@ -18,13 +18,18 @@
 - [Tunable parameters](#tunable-parameters)
 - [Data sources & methods](#data-sources--methods)
 - [Assessment 001 alignment](#assessment-001-alignment)
+- [Assessment 002 implementation — Streamlit app](#assessment-002-implementation--streamlit-app)
+  - [Phase 1 offline reference layer](#phase-1-offline-reference-layer)
+  - [Phase 2 live signal layer-commutech-cockpit](#phase-2-live-signal-layer-commutech-cockpit)
+  - [Manual refresh governance](#manual-refresh-governance)
+  - [Running the app locally](#running-the-app-locally)
 - [Obstacles & mitigations](#obstacles--mitigations)
 - [Business case snapshot](#business-case-snapshot)
 - [Repo hygiene: `.env.example` and `.gitignore`](#repo-hygiene-envexample-and-gitignore)
 - [Troubleshooting](#troubleshooting)
 - [Security, privacy, attribution & licensing](#security-privacy-attribution--licensing)
-- [Roadmap to Assessment 002](#roadmap-to-assessment-002)
-- [Appendix — copy‑paste snippets](#appendix--copy-paste-snippets)
+- [Post-Assessment 002 pipeline from 13-jan](#post-assessment-002-pipeline-from-13-jan)
+- [Appendix — copy-paste snippets](#appendix--copy-paste-snippets)
  
 ---
  
@@ -223,7 +228,51 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
   - **ARIMA/SARIMA** on historical indices (baseline forecasts).
   - **ML classifiers** with lags, time‑of‑day, planned‑works flags (richer, heavier).
   - For 001, an API‑first approach wins on clarity and immediacy; forecasting moves to 002.
+
+---
+
+## Assessment 002 implementation — CommuTech Streamlit app
  
+In Assessment 001, CommuTech is a notebook-first analytics prototype: it uses TfL’s Unified API to produce interpretable, decision-ready visuals (status now, disruption clustering, and commute-window risk) and exports the exact figures used in the slide deck.
+ 
+In Assessment 002, I implement the “operational layer” of CommuTech as an interactive Streamlit application (located in `CommuTech for 002/`). This turns the analysis into an end-user artefact: a commuter-facing interface that combines an offline reference layer (stations/zones/lines) with an optional live signal layer (TfL API), under explicit governance controls.
+ 
+### Phase 1 (offline reference layer)
+Phase 1 provides deterministic, non-networked functionality using public/static reference data:
+- Station selection (“From” / “To”) from offline station metadata.
+- Zones/line membership, direct-line intersection, and a simplified zones-based peak fare estimate.
+- “Basic data checks” surfaced in-app to validate that offline reference mappings load and join cleanly.
+ 
+This phase proves the end-to-end product workflow (UI → logic → outputs) without dependency on live services.
+ 
+### Phase 2 (live signal layer: CommuTech Cockpit)
+Phase 2 introduces live operational telemetry from the TfL Unified API and presents it in the CommuTech Cockpit:
+- A network-wide pulse (headline summary of line status across the system).
+- A journey “zoom-in” (filters the network view down to lines relevant to the selected journey).
+- Live arrivals at the destination StopPoint (preview + full table where enabled in code).
+ 
+The Phase 2 layer is explicitly optional: if no API key is available, the app continues to run in Phase 1 mode.
+ 
+### Live data governance: manual refresh
+The live layer is *not* pulled continuously. Instead, live calls occur only when the user clicks **Refresh live data**. This provides:
+- predictable cost and rate-limit behaviour,
+- traceable “last refreshed” timestamps,
+- clear governance separation between static reference data and volatile operational signals.
+ 
+### Running the app locally
+1. Open a terminal in `CommuTech for 002/`
+2. Ensure dependencies are installed (Streamlit + requests + python-dotenv alongside the repo requirements approach).
+3. Set a TfL API key (Phase 2 only):
+   - The app expects `TFL_API_KEY` (recommended).
+   - If your Assessment 001 environment used `TFL_APP_KEY`, you can set both to the same value.
+ 
+Example:
+    export TFL_API_KEY="<YOUR_TFL_KEY>"
+    export TFL_APP_KEY="<YOUR_TFL_KEY>"
+ 
+4. Run Streamlit against the main app file (the script containing `st.set_page_config(...)`):
+    streamlit run <your_streamlit_app>.py
+
 ---
  
 ## Obstacles & mitigations
@@ -244,6 +293,7 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
  
 ## Repo hygiene: `.env.example` and `.gitignore`
 I commit a **`.env.example`** to show required variables, and I **do not** commit my real `.env`.
+> Note: the Streamlit app (002) reads `TFL_API_KEY`; the notebook workflow (001) examples use `TFL_APP_KEY`. You can safely set both to the same TfL key.
  
 **`.env.example:`**
 ```dotenv
@@ -295,13 +345,22 @@ __pycache__/
 > ```
  
 ---
+
+## Post-Assessment 002 pipeline (from 13 Jan)
  
-## Roadmap to Assessment 002
-- Add **per‑line forecasting** (SARIMA/Prophet) and validate against fresh data.
-- Build a minimal **FastAPI** back‑end and a basic mobile UI (e.g., React Native) for auto‑refreshing alerts.
-- Add **personalisation:** home/work stations & usual travel times → targeted notifications.
-- Add **explainability** if I adopt ML (feature importances/SHAP).
-- Produce a brief **Security Risk Assessment** (secrets, rate‑limit abuse, error handling).
+Assessment 002 completes the core build of CommuTech as a two-layer system (offline reference + live signal). Future scope is therefore positioned as controlled extension rather than unfinished implementation.
+ 
+Planned extensions after 13 Jan (pipeline-style), aligned to IoT/analytics marking themes (data engineering, governance, modelling, evaluation, and operationalisation):
+ 
+  1. Routing layer (graph-backed): add a minimal station–line graph to generate route sequences and interchange hints, enabling route-aware (not just zone-aware) outputs.
+  2. Fare intelligence: replace the zones-based estimator with TfL fare endpoints (where available) and compute best/worst-case by route + time band.
+  3. Reliability modelling: derive per-line reliability scores using historical disruption windows; calibrate severity weights and evaluate against observed delay metrics.
+  4. Forecasting: train a horizon-based disruption forecaster (e.g., probabilistic next-24h/next-7d risk by line) with feature sets including time-of-week, planned works, and event-hour density.
+  5. Service observability: introduce structured logging of refresh events, API response metadata (counts, timestamps), and user journey selections for reproducibility and audit.
+  6. Data QA expansion (“complex data checks”): automatic summaries of live payload completeness (coverage of lines returned, missing statuses, empty arrivals, StopPoint match confidence) surfaced as a concise UI expander alongside offline checks.
+  7. Packaging & deployment: containerise the app (Docker) and/or deploy to a controlled-access hosting pattern (private link / assessor access window), with secrets management and environment isolation.
+ 
+These improvements are deliberately scoped as modular increments so the system can be evaluated and extended without changing the Phase 1/Phase 2 architecture.
  
 ---
  
