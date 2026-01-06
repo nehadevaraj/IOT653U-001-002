@@ -1,6 +1,6 @@
-# CommuTech — README (IOT 653U Assessment 001 and 002)
+# CommuTech: README (IOT 653U Assessment 001 and 002)
  
-> **Tagline:** *Live + near‑term Tube disruption made simple for commuters. API‑first insights now; forecasting next.*
+> **Tagline:** *Live + near‑term Tube disruption made simple for commuters. API‑first insights and forecasting next.*
  
 ---
  
@@ -9,7 +9,7 @@
 - [Repository layout](#repository-layout)
 - [Quick start](#quick-start)
 - [How the notebook runs (pipeline)](#how-the-notebook-runs-pipeline)
-- [Figures I use in the 001 deck — with code highlights](#figures-i-use-in-the-001-deck--with-code-highlights)
+- [Figures I use in the 001 deck (with code highlights)](#figures-i-use-in-the-001-deck--with-code-highlights)
   - [#1 Tube status now](#1-tube-status-now)
   - [Hour×Day heatmap of event‑hours](#hourxday-heatmap-of-eventhours)
   - [AM vs PM commute‑risk by line](#am-vs-pm-commute-risk-by-line)
@@ -18,7 +18,7 @@
 - [Tunable parameters](#tunable-parameters)
 - [Data sources & methods](#data-sources--methods)
 - [Assessment 001 alignment](#assessment-001-alignment)
-- [Assessment 002 implementation — Streamlit app](#assessment-002-implementation--streamlit-app)
+- [Assessment 002 implementation: Streamlit app](#assessment-002-implementation--streamlit-app)
   - [Phase 1 offline reference layer](#phase-1-offline-reference-layer)
   - [Phase 2 live signal layer-commutech-cockpit](#phase-2-live-signal-layer-commutech-cockpit)
   - [Manual refresh governance](#manual-refresh-governance)
@@ -29,7 +29,7 @@
 - [Troubleshooting](#troubleshooting)
 - [Security, privacy, attribution & licensing](#security-privacy-attribution--licensing)
 - [Post-Assessment 002 pipeline from 13-jan](#post-assessment-002-pipeline-from-13-jan)
-- [Appendix — copy-paste snippets](#appendix--copy-paste-snippets)
+- [Appendix: Copy-paste snippets](#appendix--copy-paste-snippets)
  
 ---
  
@@ -95,7 +95,7 @@ I open **Datasets.ipynb** in VS Code and **Run All**. The notebook:
  
 ---
  
-## Figures I use in the 001 slide deck — with code highlights
+## Figures I use in the 001 slide deck (with code highlights)
  
 ### #1 Tube status now
 **File:** `figures/#1 tube status now v2.png`
@@ -175,7 +175,7 @@ risk["risk_pm_pct"] = (risk["pm"] / max(1e-9, avail_pm)) * 100
 ### Planned disruption hours by line (lollipop)
 **File:** `figures/commutech_next_hours_by_line_v2.png`
  
-**What:** Ranked **lollipop** (stems + dots) with value labels — a clearer alternative to a dense bar wall.
+**What:** Ranked **lollipop** (stems + dots) with value labels. A clearer alternative to a dense bar wall.
  
 **Core code:**
 ```python
@@ -231,7 +231,7 @@ top = (plan_df.sort_values(["from_local","line"]).head(30)
 
 ---
 
-## Assessment 002 implementation — CommuTech Streamlit app
+## Assessment 002 implementation: CommuTech Streamlit app
  
 In Assessment 001, CommuTech is a notebook-first analytics prototype: it uses TfL’s Unified API to produce interpretable, decision-ready visuals (status now, disruption clustering, and commute-window risk) and exports the exact figures used in the slide deck.
  
@@ -336,7 +336,7 @@ __pycache__/
 - **Attribution:** Data © Transport for London (TfL). Use complies with Unified API terms.
  
 ### Licensing (stance for 001)
-> **For Assessment 001:** I apply **no licence**. This public repo remains *all‑rights‑reserved by default* — others can view the code/assets but do not have reuse rights.
+> **For Assessment 001:** I apply **no licence**. This public repo remains *all‑rights‑reserved by default* and others can view the code/assets but do not have reuse rights.
 >
 > **EDIT for 002 (planned):** When I move to 002, I may adopt a permissive licence (e.g., MIT) to encourage reuse. If I do, I will add a `LICENSE` file and include a short note here:
 >
