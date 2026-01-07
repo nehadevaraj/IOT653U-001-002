@@ -1,4 +1,4 @@
-# CommuTech: README (IOT 653U Assessment 001 and 002)
+# CommuTech: README (IOT653U Assessment 001 and 002)
  
 > **Tagline:** *Live + near‑term Tube disruption made simple for commuters. API‑first insights and forecasting next.*
  
@@ -23,6 +23,7 @@
   - [Phase 2 live signal layer-commutech-cockpit](#phase-2-live-signal-layer-commutech-cockpit)
   - [Manual refresh governance](#manual-refresh-governance)
   - [Running the app locally](#running-the-app-locally)
+- [Assessment 002 alignment](#assessment-002-alignment)
 - [Obstacles & mitigations](#obstacles--mitigations)
 - [Business case snapshot](#business-case-snapshot)
 - [Repo hygiene: `.env.example` and `.gitignore`](#repo-hygiene-envexample-and-gitignore)
@@ -429,7 +430,20 @@ export TFL_APP_KEY="<YOUR_TFL_KEY>"   # lasts for the current terminal session
 echo 'export TFL_APP_KEY="<YOUR_TFL_KEY>"' >> ~/.zshrc
 source ~/.zshrc
 ```
+### Assessment 002 references (offline reference layer + fare table)
  
+**Offline station + line reference files (Phase 1 / offline layer):**
+- `stations.json` and `lines.json` are derived from the public reference dataset hosted here:
+  - https://gist.github.com/paulcuth/1111303
+ 
+**Additional station codes (CRS-style three-letter codes):**
+- Battersea Power Station and Nine Elms station codes referenced from:
+  - https://techforum.tfl.gov.uk/t/crs-codes-and-other-three-letter-codes-for-battersea-power-station-and-nine-elms/1923
+ 
+**Peak fare table (zone-keyed estimate used in Phase 1):**
+- Zone-based peak fare reference used to populate `PEAK_FARE_BY_ZONES_KEY`:
+  - https://www.london.gov.uk/media/107475/download
+
 **.env file (git‑ignored):**
 1. Create `.env` next to the notebook (ensure `.env` is in `.gitignore`).
 2. Put the line:
